@@ -1,0 +1,55 @@
+c'est peut être un paramètre du parefeu
+
+un petit peu de technique
+
+intellij
+
+une mise à jour essentielle
+
+a path
+from ij
+to schema
+
+du coup le nom du package peut avoir deux sens :
+la racine : un nom regroupant le projet (même si c'est redondant avec le nom du projet)
+le reste du découpage
+
+w
+workspace
+workspace
+home
+
+c'est certainement naïf
+
+une liste, un schéma
+l'interface xml :
+l'entrée xml,
+la sortie xml
+
+est-ce que je peux faire une cercle ?
+
+le / est un séparateur de liste, avec une notion d'appartenance, de succession
+
+pour le coup, je vois 6 classes sans organisation :
+ces 6 classes ont la caractéristique : shape
+- ComposedPointWidget
+- Elipse
+- LineWidget
+- PointWidget
+- Rectangle
+- Text
+
+c'est là (dans la classe Text :)
+	public void setEnvelope(String shape) {
+		switch (shape) {
+			case "step" : envelope = new Elipse(this); break;
+			default : envelope = new Rectangle(this);
+		}
+		
+	}
+	
+choisir de mettre Widget ou non dans la classe envelope
+
+https://www.w3.org/TR/SVG/shapes.html
+9.3 The ‘circle’ element
+http://stackoverflow.com/questions/16502015/click-handler-on-svg-element
