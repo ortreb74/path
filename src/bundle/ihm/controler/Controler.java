@@ -1,6 +1,6 @@
 package bundle.ihm.controler;
 
-import bundle.ihm.view.Heap;
+import bundle.ihm.view.ScreenOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,12 +12,22 @@ import java.util.List;
  */
 public class Controler implements ActionListener
 {
-    Heap heap;
-    List<String> words;
+    private final ScreenOutput firstOutput;
+    private final ScreenOutput secondOutput;
 
-    public Controler(Heap heap, List<String> words) {
+    private ScreenOutput screenOutput;
+    private List<String> words;
+
+    public Controler(ScreenOutput firstOutput, ScreenOutput secondOutput, List<String> words) {
         super();
-        this.heap = heap;
+        this.firstOutput = firstOutput;
+        this.firstOutput.toggleGeneralFont();
+
+        this.secondOutput = firstOutput;
+        this.secondOutput.toggleNumberFont();
+
+        screenOutput = secondOutput;
+
         this.words = words;
     }
 
@@ -27,9 +37,8 @@ public class Controler implements ActionListener
 
         words.add(word);
 
-        heap.append (word + "\n");
-
-        String prefix = "You typed \"";
+        screenOutput.append (word + "\n");
+        screenOutput = firstOutput;
 
     }
 }

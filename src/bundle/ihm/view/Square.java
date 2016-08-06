@@ -14,16 +14,15 @@ public class Square extends JPanel {
     public Square(List words) {
         setLayout(new BorderLayout());
 
-        //
-        Heap heap = new Heap();
+        ScreenOutput screenOutput = new ScreenOutput();
 
         //Create a regular text field.
-        JTextField textField = new JTextField(10);
-        textField.setActionCommand("textFieldString");
+        JTextField mainInput = new JTextField(10);
+        mainInput.setActionCommand("textFieldString");
 
         //Create some labels for the fields.
         JLabel textFieldLabel = new JLabel("textFieldString : ");
-        textFieldLabel.setLabelFor(textField);
+        textFieldLabel.setLabelFor(mainInput);
 
         //Lay out the text controls and the labels.
         JPanel textControlsPane = new JPanel();
@@ -32,8 +31,10 @@ public class Square extends JPanel {
 
         textControlsPane.setLayout(gridbag);
 
+        // peut être que cette ligne construit le composant
+        // mais que fait le panneau ?
         JLabel[] labels = {textFieldLabel};
-        JTextField[] textFields = {textField};
+        JTextField[] textFields = {mainInput};
         addLabelTextRows(labels, textFields, gridbag, textControlsPane);
 
         c.gridwidth = GridBagConstraints.REMAINDER; //last
@@ -45,10 +46,38 @@ public class Square extends JPanel {
                         BorderFactory.createTitledBorder("Text Fields"),
                         BorderFactory.createEmptyBorder(5,5,5,5)));
 
-        JScrollPane areaScrollPane = new JScrollPane(heap);
-        areaScrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        JScrollPane areaScrollPane = createScrollPane(screenOutput);
+
+        // le panel de droite
+        ScreenOutput screenAlternateOutput = new ScreenOutput();
+        JScrollPane secondAreaScrollPane = createScrollPane(screenAlternateOutput);
+
+        // le panel de droite
+        JPanel rightPane = new JPanel(new BorderLayout());
+        rightPane.add(secondAreaScrollPane,  BorderLayout.PAGE_START);
+        add(rightPane, BorderLayout.LINE_END);
+
+        // la ligne qui lie les objets visuels aux données
+        // les quatres objets sont évoqués :
+        // - mainInput
+        // - un objet de type controleur
+        // - screenOutput
+        // - les mots
+
+        mainInput.addActionListener(new Controler(screenOutput, screenAlternateOutput, words));
+
+        // le panel de gauche
+        JPanel leftPane = new JPanel(new BorderLayout());
+        leftPane.add(textControlsPane,  BorderLayout.PAGE_START);
+        leftPane.add(areaScrollPane,   BorderLayout.CENTER);
+        add(leftPane, BorderLayout.LINE_START);
+    }
+
+    private JScrollPane createScrollPane(ScreenOutput screenOutput) {
+        JScrollPane areaScrollPane = new JScrollPane(screenOutput);
+        areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         areaScrollPane.setPreferredSize(new Dimension(250, 250));
+
         areaScrollPane.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createCompoundBorder(
@@ -56,20 +85,7 @@ public class Square extends JPanel {
                                 BorderFactory.createEmptyBorder(5,5,5,5)),
                         areaScrollPane.getBorder()));
 
-
-        textField.addActionListener(new Controler(heap, words));
-
-        //Put everything together.
-        JPanel leftPane = new JPanel(new BorderLayout());
-        leftPane.add(textControlsPane,
-                BorderLayout.PAGE_START);
-        leftPane.add(areaScrollPane,
-                BorderLayout.CENTER);
-
-        add(leftPane, BorderLayout.LINE_START);
-        //add(rightPane, BorderLayout.LINE_END);
-
-
+        return areaScrollPane;
     }
 
     private void addLabelTextRows(JLabel[] labels,
