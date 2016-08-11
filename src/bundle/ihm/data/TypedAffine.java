@@ -9,31 +9,45 @@ import java.util.HashMap;
 /**
  * Created by ortrébuchant on 06/08/2016.
  */
-public class Affine {
+public class TypedAffine {
 
     Map<String, QualifiedNumber> components = new HashMap<String, QualifiedNumber>();
     List<QualifiedNumber> unknown = new ArrayList<QualifiedNumber>();
 
+    Map<String,Integer> position = new HashMap<String,Integer>;
     String target;
 
     public void add(QualifiedNumber qualifiedNumber) {
-        switch (qualifiedNumber.getId()) {
+        String id = qualifiedNumber.getId();
+
+        switch (id) {
             case "x":
                 components.put("x",qualifiedNumber); break;
             case "y": components.put("y",qualifiedNumber); break;
             case "a": components.put("a",qualifiedNumber); break;
             case "b": components.put("b",qualifiedNumber); break;
+            // définition de unknown :
             default : unknown.add(qualifiedNumber);
         }
 
-        if (components.size() == 3) setTarget();
-    }
+        if (components.size() == 3) {
+            if (!components.containsKey("a")) target = "a";
+            if (!components.containsKey("b")) target = "b";
+            if (!components.containsKey("x")) target = "x";
+            if (!components.containsKey("y")) target = "y";
+        }
 
-    private void setTarget() {
-        if (!components.containsKey("a")) target = "a";
-        if (!components.containsKey("b")) target = "b";
-        if (!components.containsKey("x")) target = "x";
-        if (!components.containsKey("y")) target = "y";
+        if (components.size() <= 3) {
+            position.put(id, components.size());
+        }  else {
+            String[] ids = {"a","b","x","y"};
+            Integer pivot = position.get(id);
+            // performing the circle
+            for (String idi : ids) if (position.get(idi) > pivot) position.put(idi, position.get(idi) - 1);
+            position.put(id, 4);
+            // retrieving the first
+            for (String idi : ids) if (position.get(idi) == 1) target = idi;
+        }
     }
 
 
@@ -41,7 +55,7 @@ public class Affine {
         return components.size()>=3;
     }
 
-    public String[] getWords() {
+    public Affine getAffine() {
         String[] result = new String[8];
 
         if (target.equals("b")) {
