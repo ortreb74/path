@@ -1,5 +1,7 @@
 package bundle.ihm.controler;
 
+import bundle.ihm.data.Affine;
+import bundle.ihm.data.QualifiedNumber;
 import bundle.ihm.view.ScreenOutput;
 
 import javax.swing.*;
@@ -12,33 +14,55 @@ import java.util.List;
  */
 public class Controler implements ActionListener
 {
+    private QualifiedNumber qualifiedNumber;
+    private Affine typedAffine;
+
     private final ScreenOutput firstOutput;
     private final ScreenOutput secondOutput;
 
     private ScreenOutput screenOutput;
     private List<String> words;
 
+
     public Controler(ScreenOutput firstOutput, ScreenOutput secondOutput, List<String> words) {
         super();
+
+        qualifiedNumber = new QualifiedNumber();
+        typedAffine = new Affine();
+
         this.firstOutput = firstOutput;
         this.firstOutput.toggleGeneralFont();
 
-        this.secondOutput = firstOutput;
+        this.secondOutput = secondOutput;
         this.secondOutput.toggleNumberFont();
 
-        screenOutput = secondOutput;
+        screenOutput = firstOutput;
 
         this.words = words;
     }
 
     public void actionPerformed(ActionEvent e) {
         JTextField source = (JTextField)e.getSource();
-        String word = source.getText();
 
-        words.add(word);
+        String input = source.getText();
+        source.setText(null);
 
-        screenOutput.append (word + "\n");
-        screenOutput = firstOutput;
+        words.add(input);
+
+        screenOutput.append (input + "\n");
+        //screenOutput = firstOutput;
+        qualifiedNumber.add(input);
+        if (qualifiedNumber.isCompleted()) {
+            typedAffine.add(qualifiedNumber);
+
+            if (typedAffine.isCompleted()) {
+                secondOutput.setText(null);
+
+                for (String w : typedAffine.getWords()) secondOutput.append (w + "\n");
+            }
+
+            qualifiedNumber = new QualifiedNumber();
+        }
 
     }
 }
