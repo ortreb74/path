@@ -14,15 +14,14 @@ public class TypedAffine {
     Map<String, QualifiedNumber> components = new HashMap<String, QualifiedNumber>();
     List<QualifiedNumber> unknown = new ArrayList<QualifiedNumber>();
 
-    Map<String,Integer> position = new HashMap<String,Integer>;
+    Map<String,Integer> position = new HashMap<String,Integer>();
     String target;
 
     public void add(QualifiedNumber qualifiedNumber) {
         String id = qualifiedNumber.getId();
 
         switch (id) {
-            case "x":
-                components.put("x",qualifiedNumber); break;
+            case "x": components.put("x",qualifiedNumber); break;
             case "y": components.put("y",qualifiedNumber); break;
             case "a": components.put("a",qualifiedNumber); break;
             case "b": components.put("b",qualifiedNumber); break;
@@ -56,34 +55,29 @@ public class TypedAffine {
     }
 
     public Affine getAffine() {
-        String[] result = new String[8];
+        Affine result = new Affine();
 
         if (target.equals("b")) {
-            result[0] = components.containsKey("b") ? components.get("b").getLastName() : "b";
-            result[1] = calculateB();
+            //result[0] = components.containsKey("b") ? components.get("b").getLastName() : "b";
+            //result[1] = calculateB();
         }
 
         if (target.equals("y")) {
-            result[0] = components.containsKey("y") ? components.get("y").getLastName() : "y";
-            result[1] = calculateY();
+            //result[0] = components.containsKey("y") ? components.get("y").getLastName() : "y";
+            //result[1] = calculateY();
         }
 
         if (target.equals("x")) {
-            result[0] = components.containsKey("x") ? components.get("x").getLastName() : "x";
-            result[1] = calculateX();
+            //result[0] = components.containsKey("x") ? components.get("x").getLastName() : "x";
+            //result[1] = calculateX();
         }
 
         if (target.equals("a")) {
-            result[0] = components.containsKey("a") ? components.get("a").getLastName() : "a";
-            result[1] = calculateA();
-            result[2] = components.get("x").getLastName();
-            result[3] = String.valueOf(components.get("x").getLastValue());
-            result[4] = components.get("b").getLastName();
-            result[5] = String.valueOf(components.get("b").getLastValue());
-            result[6] = components.get("y").getLastName();
-            result[7] = String.valueOf(components.get("y").getLastValue());
+            result.set("a",components.containsKey("a") ? components.get("a").getLastName() : "a",calculateA() );
+            result.set("x",components.containsKey("x") ? components.get("x").getLastName() : "x", String.valueOf(components.get("x").getLastValue()));
+            result.set("b",components.containsKey("b") ? components.get("b").getLastName() : "b",components.get("b").getLastValue() );
+            result.set("y",components.containsKey("y") ? components.get("y").getLastName() : "y",components.get("y").getLastValue() );
         }
-
 
         return result;
     }
