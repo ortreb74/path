@@ -4,6 +4,7 @@ import bundle.schema.schema.Schema;
 import bundle.schema.schema.SchemaStudio;
 import bundle.schema.schema.basics.Point;
 import bundle.schema.schema.object.SchemaFirstList;
+import efl.data.ChaineBu;
 
 public class Command {
 
@@ -166,6 +167,20 @@ public class Command {
 					scs.next("to schema", "disc");
 					schema = scs;
 					break;
+
+				case("ChaineBu") :
+					System.out.println(args[1]);
+					scs = new SchemaStudio();
+
+					ChaineBu bcu = new ChaineBu();
+
+					scs.place("prog.lib (32-37)", new Point(250,50));
+
+					for (String step : bcu.getSteps()) scs.next(step);
+
+					schema=scs;
+					break;
+
 				default:
 					String parameter = args[1];
 					System.out.println(parameter);
