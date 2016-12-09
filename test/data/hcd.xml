@@ -1,0 +1,56 @@
+<config>
+	
+	<!-- REVUES -->
+	
+	<revues>
+	<variable name="BDP-input-dir-path" value="/e3/particulier/bdp"/>
+	<variable name="BF-input-dir-path" value="/e3/travail/bull"/>
+	<variable name="BS-input-dir-path" value="/e3/social/bull"/>
+<!--	<variable name="RSAL-input-dir-path" value="/e3/social/rsal"/> obsolète-->
+	<variable name="BRDA-input-dir-path" value="/e3/societes/brda"/>
+	<variable name="BPIM-input-dir-path" value="/e3/specimmo/bpim"/>
+<!--	<variable name="BEEI-input-dir-path" value="/e3/mementos/beei"/> obsolète-->
+	<variable name="BPAT-input-dir-path" value="/e3/mementos/bpat"/>
+	<variable name="BAF-input-dir-path" value="/e3/mementos/baf"/>
+	<!-- obsolète <variable name="BCF-input-dir-path" value="/e3/comptable/bcf"/>
+	<variable name="BCFE-input-dir-path" value="/e3/comptable/bcf"/>
+	<variable name="BCFG-input-dir-path" value="/e3/comptable/bcf"/>
+	<variable name="BCFF-input-dir-path" value="/e3/comptable/bcf"/>
+	<variable name="BCFI-input-dir-path" value="/e3/comptable/bcf"/>
+	<variable name="RF-input-dir-path" value="/e3/espagne/rf"/>
+	<variable name="RS-input-dir-path" value="/e3/espagne/rs"/>
+	<variable name="RMC-input-dir-path" value="/e3/espagne/rmc"/>
+	<variable name="RIU-input-dir-path" value="/e3/espagne/riu"/>
+	<variable name="AC-input-dir-path" value="/e3/italie/ac"/>
+	<variable name="AF-input-dir-path" value="/e3/italie/af"/>
+	<variable name="AS-input-dir-path" value="/e3/italie/as"/>
+	<variable name="AL-input-dir-path" value="/e3/italie/al"/>
+	<variable name="TN-input-dir-path" value="/e3/angleterre/tn"/>-->
+	<variable name="RJDA-input-dir-path" value="/e3/societes/rjda"/>
+	<variable name="RJF-input-dir-path" value="/e3/travail/rj"/>
+	<variable name="RJS-input-dir-path" value="/e3/social/rj"/>
+	<variable name="FR-input-dir-path" value="/e3/travail/fr"/>
+	<variable name="FRS-input-dir-path" value="/e3/social/fr"/>
+	<variable name="FRC-input-dir-path" value="/e3/comptable/frc"/> 
+	</revues>
+	
+	<!-- MEMENTO -->
+	
+	<mementos>
+	<variable name="MTE-input-file-path" value="/e3/mementos/mte/mte_fus.sgm"/>
+	<variable name="MGI-input-file-path" value="/e3/specimmo/mgi/mgi_fus.sgm"/>
+	<variable name="MVI-input-file-path" value="/e3/specimmo/mvi/mvi_fus.sgm"/>
+	<variable name="MUC-input-file-path" value="/e3/specimmo/muc/muc_fus.sgm"/>
+	<variable name="MF-input-file-path" value="/e3/extractmem/mf_fus.sgm"/>
+	<variable name="MS-input-file-path" value="/e3/social/mem/ms_fus.sgm"/>
+	<variable name="MTVA-input-file-path" value="/e3/travail/mtva/mtva_fus.sgm"/>
+	</mementos>
+	
+	<!-- PROGRAMME -->
+	
+	<!--<variable name="output-dir-path" value="/f6/eflse/memento"/>-->
+	<variable name="index-dir-path" value="/e3/extractmem/index"/>
+	<variable name="index-config-path" value="/e1/apps/eip/share/config/memento.index.config.xml"/>
+	<variable name="output-dir-path" value="."/>
+	<variable name="log-output-dir-path" value="."/>
+</config>
