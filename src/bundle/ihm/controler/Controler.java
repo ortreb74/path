@@ -4,6 +4,8 @@ import bundle.ihm.data.TypedAffine;
 import bundle.ihm.data.QualifiedNumber;
 import bundle.ihm.view.ScreenOutput;
 
+import bundle.ihm.data.Pair;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,8 @@ public class Controler implements ActionListener
 {
     private QualifiedNumber qualifiedNumber;
     private TypedAffine typedAffine;
+
+    private Pair pair = new Pair();
 
     private final ScreenOutput firstOutput;
     private final ScreenOutput secondOutput;
@@ -49,10 +53,16 @@ public class Controler implements ActionListener
         source.setText(null);
 
         words.add(input);
+        pair.add(input);
 
         screenOutput.append (input + "\n");
         //screenOutput = firstOutput;
         qualifiedNumber.add(input);
+
+        if (pair.isCompleted()) {
+            secondOutput.append (pair.getQ() + "\n");
+        }
+
         if (qualifiedNumber.isCompleted()) {
             typedAffine.add(qualifiedNumber);
 

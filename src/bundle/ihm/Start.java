@@ -17,9 +17,12 @@ public class Start {
         //Schedule a job for the event dispatching thread:
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
+            private String windowsName = "figures";
+            private int mode = 1;
+
             public void run() {
                 //UIManager.put("swing.boldMetal", Boolean.FALSE); //Turn off metal's use of bold fonts
-                JFrame frame = new JFrame("copy");
+                JFrame frame = new JFrame(windowsName);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                 List words = new ArrayList<String>();
