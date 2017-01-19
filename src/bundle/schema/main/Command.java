@@ -181,6 +181,37 @@ public class Command {
 					schema=scs;
 					break;
 
+				case("MementoExtract") :
+					System.out.println(args[1]);
+					scs = new SchemaStudio();
+
+					//ChaineBu bcu = new ChaineBu();
+					//for (String step : bcu.getSteps()) scs.next(step);
+
+					scs.place("clean-extract-csgml.xslt", new Point(250,50));
+
+					scs.next("clean.xslt");
+
+
+					schema=scs;
+					break;
+				case("link") :
+					System.out.println(args[1]);
+					scs = new SchemaStudio();
+
+					//ChaineBu bcu = new ChaineBu();
+					//for (String step : bcu.getSteps()) scs.next(step);
+
+					scs.place("d.xml", new Point(250,50));
+					scs.next("fs.xml");
+					scs.next("MementoExtract-aTest.xml");
+					scs.setRState();
+					scs.next("ME-start-start.xml");
+
+					schema=scs;
+					break;
+
+
 				default:
 					String parameter = args[1];
 					System.out.println(parameter);
