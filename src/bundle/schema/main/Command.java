@@ -1,14 +1,18 @@
 package bundle.schema.main;
 
+import bundle.human.HR_URL;
 import bundle.schema.schema.Schema;
 import bundle.schema.schema.SchemaStudio;
 import bundle.schema.schema.basics.Point;
 import bundle.schema.schema.object.SchemaFirstList;
 
+import java.net.MalformedURLException;
+
+
 public class Command {
 
 	public static void main(String[] args) {
-		System.out.println("D�but du programme (main.Command)");
+		System.out.println("Début du programme (main.Command)");
 		Schema schema = null;
 		boolean defaut = false;
 		String fileName = "default.xml";
@@ -174,11 +178,14 @@ public class Command {
 
 					if (parameter.contains("/")) {
 						System.out.println("liste");
-						boolean start = true;
+
+						String[] words;
+
+						HR_URL url = new HR_URL(parameter);
 
 						scs = new SchemaStudio();
-
-						for (String word : parameter.split ("/")) {
+						boolean start = true;
+						for (String word : url.getWords()) {
 							if (start) scs.place(word, "disc", new Point (100,100)); else scs.next(word, "disc") ;
 								scs.setRState();
 							start = false;
