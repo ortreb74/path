@@ -1,6 +1,8 @@
-package bundle.human;
+package home.file;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,12 +11,14 @@ import java.util.Map;
  * Created by drncl on 02/01/2017.
  */
 
-public class HR_URL {
+public class HomeUri {
 
     private String[] words;
     private Map<String,String> map = new HashMap<String,String>();
 
-    public HR_URL(String parameter) {
+    HomeFile homeFile;
+
+    public HomeUri(String parameter) throws URISyntaxException {
         try {
             URL url = new URL(parameter);
 
@@ -39,11 +43,15 @@ public class HR_URL {
                 System.out.println (e.getKey() + " : " + e.getValue());
             }
 
+            homeFile = new HomeFile(url);
+
             words = parameter.split ("/");
 
         }  catch (MalformedURLException e) {
             System.out.println("Impossible de parser l'URL");
             words = parameter.split ("/");
+
+            homeFile = new HomeFile(parameter);
         }
     }
 
