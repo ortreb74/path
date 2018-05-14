@@ -1,18 +1,22 @@
 package bundle.schema.main;
 
-import bundle.human.HR_URL;
+import home.file.HomeUri;
 import bundle.schema.schema.Schema;
 import bundle.schema.schema.SchemaStudio;
 import bundle.schema.schema.basics.Point;
 import bundle.schema.schema.object.SchemaFirstList;
+import log.LogFile;
 
-import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 
 public class Command {
 
 	public static void main(String[] args) {
 		System.out.println("Début du programme (main.Command)");
+
+		LogFile logFile = new LogFile("file:/c:/log/");
+
 		Schema schema = null;
 		boolean defaut = false;
 		String fileName = "default.xml";
@@ -181,7 +185,12 @@ public class Command {
 
 						String[] words;
 
-						HR_URL url = new HR_URL(parameter);
+						HomeUri url = null;
+						try {
+							url = new HomeUri(parameter);
+						} catch (URISyntaxException e) {
+							e.printStackTrace();
+						}
 
 						scs = new SchemaStudio();
 						boolean start = true;

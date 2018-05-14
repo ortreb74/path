@@ -1,4 +1,4 @@
-package edu.swing;
+package edu.swing.list;
 
 import javax.swing.*;
 
